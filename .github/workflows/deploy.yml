@@ -27,7 +27,11 @@ jobs:
           echo "Secret: ${#raw} characters, $(printf '%s\n' "$raw" | wc -l) lines"
           case "$raw" in *"BEGIN OPENSSH PRIVATE KEY"*) echo "BEGIN line: found";; *) echo "BEGIN line: MISSING";; esac
           case "$raw" in *"END OPENSSH PRIVATE KEY"*)   echo "END line: found";;   *) echo "END line: MISSING";;   esac
-          body=$(printf '%s\n' "$raw" | sed -n '/BEGIN OPENSSH PRIVATE KEY/,/END OPENSSH PRIVATE KEY/p' | sed -e 's/.*BEGIN OPENSSH PRIVATE KEY-*//' -e 's/-*END OPENSSH PRIVATE KEY.*//' | tr -d ' \t\n-')
+          case "$raw" in
+            *"BEGIN OPENSSH PRIVATE KEY"*) block=$(printf '%s\n' "$raw" | sed -n '/BEGIN OPENSSH PRIVATE KEY/,/END OPENSSH PRIVATE KEY/p') ;;
+            *) block=$raw ;;   # only the middle of the key was saved: use it as is
+          esac
+          body=$(printf '%s\n' "$block" | sed -e 's/.*BEGIN OPENSSH PRIVATE KEY-*//' -e 's/-*END OPENSSH PRIVATE KEY.*//' | tr -d ' \t\n-')
           echo "Key body: ${#body} characters (a valid key is roughly 300-400)"
           { echo "-----BEGIN OPENSSH PRIVATE KEY-----"; printf '%s' "$body" | fold -w 70; echo; echo "-----END OPENSSH PRIVATE KEY-----"; } > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
