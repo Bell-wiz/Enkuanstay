@@ -1,0 +1,25 @@
+# Save in the repo as .github/workflows/deploy.yml
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:      # also adds a manual "Run workflow" button
+
+concurrency: deploy-enkuan
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deploy on the VPS
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          # The key is locked to the deploy command on the server, so no command is passed.
+          ssh -o BatchMode=yes root@92.112.193.206
