@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enkuan Stay · Stay with Addis Ababa for COP32</title>
+<meta name="description" content="Inspected homes, guesthouses and serviced apartments in Addis Ababa for COP32 delegates, at published rates. Host with us and get paid in birr.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Public+Sans:wght@400;600;700&family=Noto+Sans+Ethiopic:wght@400;600&display=swap">
+<style>
+:root{--ink:#13302B;--ink2:#4A4F4B;--mute:#6A6F6B;--paper:#F7F4EC;--card:#FFFDF7;--line:#E4DDCC;--gold:#C8912E;--gold2:#E2B45A;--brown:#8A5A12;--green:#2F7A5B;--mint:#C9D8D2}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Public Sans',Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.serif{font-family:'Libre Baskerville',Georgia,serif}
+.eth{font-family:'Noto Sans Ethiopic',sans-serif}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{font-family:'Libre Baskerville',Georgia,serif;font-weight:700;font-size:24px;text-decoration:none}
+.logo span{font-weight:400;color:var(--brown)}
+nav{display:flex;gap:24px;font-size:15px}
+nav a{text-decoration:none}nav a:hover{color:var(--brown)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:10px;font-weight:700;font-size:16px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.btn-gold{background:var(--gold);color:var(--ink)}.btn-gold:hover{background:var(--gold2)}
+.btn-line{border:1px solid var(--mint);color:var(--paper)}.btn-line:hover{background:rgba(255,255,255,.08)}
+.btn-ink{background:var(--ink);color:var(--paper)}.btn-ink:hover{background:#1d443d}
+.hero{background:var(--ink);color:var(--paper);padding:88px 0 96px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:linear-gradient(var(--green) 0 33%,var(--gold2) 33% 66%,#B8452F 66%)}
+.hero .kicker{color:var(--gold2);font-size:19px;margin:0 0 16px}
+.hero h1{font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:clamp(34px,5.4vw,58px);line-height:1.12;margin:0 0 20px;max-width:820px}
+.hero p.lead{color:var(--mint);font-size:clamp(17px,2vw,20px);max-width:680px;margin:0 0 32px}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;max-width:860px}
+.stat b{display:block;font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:clamp(30px,4vw,44px);color:var(--paper)}
+.stat span{color:var(--mint);font-size:15px}
+section{padding:80px 0}
+.eyebrow{font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--brown);margin:0 0 10px}
+h2{font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:clamp(28px,3.4vw,38px);line-height:1.2;margin:0 0 16px}
+.sub{color:var(--ink2);font-size:18px;max-width:680px;margin:0 0 40px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+.card h3{font-size:18px;margin:14px 0 6px}
+.card p{margin:0;color:var(--ink2);font-size:15px}
+.steps{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:18px}
+.steps li{display:flex;gap:16px}
+.steps .n{flex:none;width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:700}
+.steps b{display:block}
+.steps span{color:var(--ink2);font-size:15px}
+.alt{background:#EDE7D8}
+form{display:flex;flex-direction:column;gap:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}
+input,select,textarea{height:48px;border:1px solid #D0C8B3;border-radius:10px;padding:0 14px;font-size:16px;background:#fff;color:var(--ink);font-family:inherit}
+textarea{height:96px;padding:12px 14px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+.consent{flex-direction:row;align-items:flex-start;gap:10px;font-weight:400;color:var(--ink2);font-size:14px}
+.consent input{height:20px;width:20px;flex:none;margin-top:2px;accent-color:var(--ink)}
+.msg{font-size:15px;padding:12px 14px;border-radius:10px;display:none}
+.msg.ok{display:block;background:#E6EFE9;color:#1F5A40}
+.msg.err{display:block;background:#F6E3DC;color:#8A2E17}
+.hp{position:absolute;left:-9999px}
+footer{background:var(--ink);color:var(--mint);padding:40px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer .logo{color:var(--paper);font-size:20px}
+footer .logo span{color:var(--gold2)}
+@media (max-width:900px){.grid4{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}nav{display:none}}
+@media (max-width:560px){.grid4,.row,.stats{grid-template-columns:1fr}.stats{gap:16px}section{padding:56px 0}.hero{padding:56px 0 64px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">Enkuan <span>Stay</span></a>
+    <nav>
+      <a href="#why">Why Enkuan Stay</a>
+      <a href="#hosts">Become a host</a>
+      <a href="/demo/">How booking works</a>
+      <a href="#delegations">For delegations</a>
+    </nav>
+    <a class="btn btn-ink" href="#hosts" style="min-height:42px;padding:0 18px;font-size:15px">List your home</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker"><span class="eth">እንኳን ደህና መጡ</span> · Welcome to Addis Ababa</p>
+    <h1>Stay with Addis Ababa for COP32</h1>
+    <p class="lead">Inspected homes, guesthouses and serviced apartments at published rates, with invoices your organization can approve. Run in Ethiopia, paid out to Ethiopian hosts.</p>
+    <div class="ctas">
+      <a class="btn btn-gold" href="#delegations">Register interest as a delegation</a>
+      <a class="btn btn-line" href="#hosts">Host with Enkuan Stay</a>
+      <a class="btn btn-line" href="/demo/">See how booking works</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>80,000+</b><span>delegates expected for COP32 in 2027</span></div>
+      <div class="stat"><b>~25,000</b><span>hotel and guesthouse beds in the city today</span></div>
+      <div class="stat"><b>1 platform</b><span>to bring verified homes to delegates</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <p class="eyebrow">Why Enkuan Stay</p>
+    <h2>Built so every guest is welcomed fairly</h2>
+    <p class="sub">Past climate summits were marked by price gouging and cancelled bookings. Enkuan Stay is designed from the start to prevent both.</p>
+    <div class="grid4">
+      <div class="card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2F7A5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+        <h3>Inspected and certified</h3>
+        <p>Every home is checked on site for safety, water, backup power and internet.</p>
+      </div>
+      <div class="card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2F7A5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15h3v3H7zM12 11h3v7h-3zM17 7h3v11h-3z"/></svg>
+        <h3>Published rates</h3>
+        <p>Rates are registered in advance, by class. No surge pricing during the conference.</p>
+      </div>
+      <div class="card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2F7A5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <h3>Booking guarantee</h3>
+        <p>A confirmed stay is held at its price. If a host cancels, we move you to an equal or better home.</p>
+      </div>
+      <div class="card">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2F7A5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        <h3>Invoices that clear</h3>
+        <p>Formal invoices for governments, UN bodies and NGOs, with card or bank transfer payment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hosts" class="alt">
+  <div class="wrap grid2">
+    <div>
+      <p class="eyebrow">Become a host</p>
+      <h2>Welcome the world into your home</h2>
+      <p class="sub" style="margin-bottom:28px">Have a spare room, a guest suite, an apartment or a guesthouse in Addis Ababa? Register your interest and we will contact you before onboarding opens.</p>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Register</b><span>Tell us about you and your property. It takes two minutes.</span></div></li>
+        <li><span class="n">2</span><div><b>Free inspection</b><span>We visit to check safety, water, power and internet.</span></div></li>
+        <li><span class="n">3</span><div><b>List at a published rate</b><span>You set a price inside the band for your property's class.</span></div></li>
+        <li><span class="n">4</span><div><b>Get paid in birr</b><span>Payouts after each stay via Telebirr, CBE Birr or bank transfer.</span></div></li>
+      </ol>
+    </div>
+    <div class="card" style="padding:30px">
+      <form id="hostForm" data-kind="host" novalidate>
+        <h3 style="margin:0 0 4px;font-size:20px">Host interest</h3>
+        <div class="row">
+          <label>Full name<input name="name" required autocomplete="name"></label>
+          <label>Phone<input name="phone" type="tel" required placeholder="+251 9__ ___ ___" autocomplete="tel"></label>
+        </div>
+        <label>Email (optional)<input name="email" type="email" autocomplete="email"></label>
+        <div class="row">
+          <label>Sub-city<select name="area" required>
+            <option value="">Choose</option><option>Addis Ketema</option><option>Akaky Kaliti</option><option>Arada</option><option>Bole</option><option>Gulele</option><option>Kirkos</option><option>Kolfe Keranio</option><option>Lemi Kura</option><option>Lideta</option><option>Nifas Silk-Lafto</option><option>Yeka</option>
+          </select></label>
+          <label>Property type<select name="type" required>
+            <option value="">Choose</option><option>Room in my home</option><option>Whole home or floor</option><option>Serviced apartment</option><option>Guesthouse</option>
+          </select></label>
+        </div>
+        <label>Number of guest rooms<input name="rooms" type="number" min="1" max="200" required></label>
+        <label class="consent"><input type="checkbox" name="consent" required>I agree that Enkuan Stay may store these details to contact me about hosting. I can ask for them to be deleted at any time.</label>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-ink" type="submit">Register as a host</button>
+        <div class="msg" role="status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="delegations">
+  <div class="wrap grid2">
+    <div>
+      <p class="eyebrow">For delegations</p>
+      <h2>Plan your COP32 stay early</h2>
+      <p class="sub" style="margin-bottom:24px">Government delegations, UN agencies, NGOs, businesses and media: tell us what you need and we will share options as inventory opens.</p>
+      <ul class="steps">
+        <li><span class="n">✓</span><div><b>Group allocations</b><span>Several homes or rooms near each other, under one invoice.</span></div></li>
+        <li><span class="n">✓</span><div><b>Near the venue</b><span>Stays close to venue shuttle stops, with airport pickup available.</span></div></li>
+        <li><span class="n">✓</span><div><b>Priority for LDC and SIDS delegates</b><span>Early access and affordable rate bands for delegates from least developed countries and small island states.</span></div></li>
+      </ul>
+    </div>
+    <div class="card" style="padding:30px">
+      <form id="delForm" data-kind="delegation" novalidate>
+        <h3 style="margin:0 0 4px;font-size:20px">Delegation interest</h3>
+        <div class="row">
+          <label>Contact name<input name="name" required autocomplete="name"></label>
+          <label>Email<input name="email" type="email" required autocomplete="email"></label>
+        </div>
+        <div class="row">
+          <label>Organization<input name="org" required autocomplete="organization"></label>
+          <label>Attending as<select name="type" required>
+            <option value="">Choose</option><option>Party delegation</option><option>UN body or agency</option><option>Observer organization or NGO</option><option>Business</option><option>Media</option>
+          </select></label>
+        </div>
+        <div class="row">
+          <label>Number of guests<input name="guests" type="number" min="1" max="2000" required></label>
+          <label>Country<input name="country" autocomplete="country-name"></label>
+        </div>
+        <label>Anything else (optional)<textarea name="notes" maxlength="1000"></textarea></label>
+        <label class="consent"><input type="checkbox" name="consent" required>I agree that Enkuan Stay may store these details to contact me about accommodation. I can ask for them to be deleted at any time.</label>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-ink" type="submit">Register interest</button>
+        <div class="msg" role="status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><span class="logo">Enkuan <span>Stay</span></span><br>Community accommodation for COP32 Addis Ababa, 2027</div>
+    <div>hello@enkuanstay.com<br>© 2026 Enkuan Stay</div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('form[data-kind]').forEach(function(f){
+  f.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var msg=f.querySelector('.msg'), btn=f.querySelector('button');
+    msg.className='msg';
+    if(!f.checkValidity()){f.reportValidity();return;}
+    var data=Object.fromEntries(new FormData(f).entries());
+    data.kind=f.dataset.kind; data.consent=!!f.consent.checked;
+    btn.disabled=true; btn.textContent='Sending…';
+    try{
+      var r=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+      if(!r.ok) throw new Error();
+      f.reset(); msg.textContent='Thank you. We have your details and will be in touch.'; msg.className='msg ok';
+    }catch(err){
+      msg.textContent='Sorry, that did not go through. Please try again or email hello@enkuanstay.com.'; msg.className='msg err';
+    }
+    btn.disabled=false; btn.textContent=f.dataset.kind==='host'?'Register as a host':'Register interest';
+  });
+});
+</script>
+</body>
+</html>

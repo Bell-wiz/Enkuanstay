@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How booking works · Enkuan Stay</title>
+<meta name="description" content="A walkthrough of how delegates will book inspected homes in Addis Ababa for COP32. Sample listings, for demonstration only.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{--ink:#13302B;--ink2:#4A4F4B;--mute:#6A6F6B;--paper:#F7F4EC;--card:#FFFDF7;--line:#E4DDCC;--gold:#C8912E;--gold2:#E2B45A;--brown:#8A5A12;--green:#2F7A5B;--mint:#C9D8D2}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Public Sans',Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+header{background:var(--card);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{font-family:'Libre Baskerville',Georgia,serif;font-weight:700;font-size:24px;text-decoration:none}
+.logo span{font-weight:400;color:var(--brown)}
+.banner{background:#13302B;color:#E2B45A;font-size:15px;padding:10px 0;text-align:center;font-weight:600}
+h1{font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:clamp(28px,3.6vw,40px);margin:32px 0 8px}
+.lead{color:var(--ink2);font-size:18px;margin:0 0 24px;max-width:720px}
+.steps{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 24px;padding:0;list-style:none}
+.steps li{font-size:14px;font-weight:600;padding:8px 14px;border-radius:999px;background:#EDE7D8;color:var(--brown)}
+.steps li[aria-current]{background:var(--ink);color:var(--paper)}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.pill{border:1px solid #D8D1BF;background:var(--card);color:var(--ink);border-radius:999px;padding:11px 18px;font-size:15px;font-weight:600;cursor:pointer;min-height:44px;font-family:inherit}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cols{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
+#map{height:560px;border-radius:16px;border:1px solid var(--line);position:sticky;top:20px}
+.list{display:flex;flex-direction:column;gap:14px;max-height:560px;overflow:auto;padding-right:4px}
+.item{display:block;text-align:left;width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;font-family:inherit;min-height:44px}
+.inner{display:flex;gap:16px;align-items:flex-start;width:100%}
+.list>.item{flex:none}
+.txt{display:flex;flex-direction:column;flex:1;min-width:0}
+.item:hover,.item:focus-visible{border-color:var(--gold);outline:none}
+.item[aria-current="true"]{border-color:var(--ink);box-shadow:0 0 0 2px rgba(19,48,43,.12)}
+.thumb{display:block;width:110px;height:86px;border-radius:10px;flex:none}
+.item h3,.item p{margin:0}
+.item .meta{margin-top:4px}
+.item .rate{margin-top:6px}
+.item .badge{display:inline-flex;align-self:flex-start}
+.item h3{margin:0;font-size:17px;line-height:1.3}
+.meta{font-size:14px;color:var(--ink2);margin:4px 0 0}
+.rate{font-size:17px;font-weight:700;margin-top:6px}
+.rate small{font-weight:400;color:var(--ink2)}
+.badge{display:inline-flex;align-items:center;gap:6px;background:#E6EFE9;color:#1F5A40;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;margin-bottom:6px}
+dialog{border:0;border-radius:18px;padding:0;max-width:560px;width:92vw;background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(19,48,43,.55)}
+.d-head{padding:24px 26px 0}
+.d-body{padding:18px 26px 26px;display:flex;flex-direction:column;gap:14px}
+.row{display:flex;justify-content:space-between;font-size:16px}
+.total{border-top:1px solid var(--line);padding-top:12px;font-weight:700;font-size:18px}
+.note{font-size:14px;line-height:1.5;color:#1F5A40;background:#E6EFE9;border-radius:10px;padding:12px 14px}
+.warn{font-size:14px;line-height:1.5;color:#7A4A12;background:#F3E7D2;border-radius:10px;padding:12px 14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:10px;font-weight:700;font-size:16px;border:0;cursor:pointer;font-family:inherit;text-decoration:none}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-line{background:var(--card);color:var(--ink);border:1px solid #D8D1BF}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+footer{background:var(--ink);color:var(--mint);padding:36px 0;margin-top:56px;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media (max-width:900px){.cols{grid-template-columns:1fr}#map{height:360px;position:static}.list{max-height:none}}
+</style>
+</head>
+<body>
+<div class="banner">Demonstration only · sample homes and rates · bookings open in 2027</div>
+<header>
+  <div class="wrap">
+    <a class="logo" href="/">Enkuan <span>Stay</span></a>
+    <a class="btn btn-ink" href="/#delegations" style="min-height:42px;padding:0 18px;font-size:15px">Register interest</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>How a delegate books a stay</h1>
+  <p class="lead">Pick a home on the map, see what the inspection covers, and walk through the booking. Everything here is sample data, so nothing is charged and no home is reserved.</p>
+  <ol class="steps">
+    <li aria-current="step">1 · Choose a stay</li>
+    <li>2 · Check the details</li>
+    <li>3 · Confirm and invoice</li>
+  </ol>
+
+  <div class="filters" role="group" aria-label="Filter sample stays">
+    <button class="pill" data-filter="all" aria-pressed="true">All stays</button>
+    <button class="pill" data-filter="Home" aria-pressed="false">Homes</button>
+    <button class="pill" data-filter="Guesthouse" aria-pressed="false">Guesthouses</button>
+    <button class="pill" data-filter="Serviced apartment" aria-pressed="false">Serviced apartments</button>
+  </div>
+
+  <div class="cols">
+    <div id="map" role="application" aria-label="Map of sample stays in Addis Ababa"></div>
+    <div class="list" id="list"></div>
+  </div>
+</main>
+
+<dialog id="detail" aria-labelledby="dTitle">
+  <div class="d-head">
+    <span class="badge">Certified · sample listing</span>
+    <h2 id="dTitle" style="margin:0;font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:26px"></h2>
+    <p class="meta" id="dMeta"></p>
+  </div>
+  <div class="d-body">
+    <p style="margin:0;font-size:15px;line-height:1.55;color:var(--ink2)" id="dDesc"></p>
+    <div id="dChecks" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:15px"></div>
+    <div class="row"><span id="dRateLine"></span><span id="dSub"></span></div>
+    <div class="row total"><span>Total for 12 nights</span><span id="dTotal"></span></div>
+    <p class="note">The rate is registered in advance and cannot rise after booking. A confirmed stay is held at this price.</p>
+    <div class="btns">
+      <button class="btn btn-ink" id="dBook">Continue to booking</button>
+      <button class="btn btn-line" id="dClose">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="confirm" aria-labelledby="cTitle">
+  <div class="d-head">
+    <h2 id="cTitle" style="margin:0;font-family:'Libre Baskerville',Georgia,serif;font-weight:400;font-size:26px">This is where you would confirm</h2>
+  </div>
+  <div class="d-body">
+    <p style="margin:0;font-size:15px;line-height:1.55;color:var(--ink2)">At this step a delegate enters their organization and delegation type, chooses card payment or bank transfer, and receives a formal invoice for per-diem claims. Their stay is then guaranteed at the booked rate, with shuttle details sent before arrival.</p>
+    <p class="warn">Nothing has been booked or charged. Bookings open once COP32 accommodation opens in 2027.</p>
+    <div class="btns">
+      <a class="btn btn-ink" href="/#delegations">Register your delegation's interest</a>
+      <button class="btn btn-line" id="cClose">Back to the map</button>
+    </div>
+  </div>
+</dialog>
+
+<footer>
+  <div class="wrap">
+    <span>Enkuan Stay · Community accommodation for COP32 Addis Ababa, 2027</span>
+    <span>hello@enkuanstay.com</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+var VENUE = [9.0241, 38.8512];
+var STAYS = [
+  {id:1,name:"Garden guest suite with private entrance",area:"Bole",type:"Home",lat:8.9950,lng:38.7870,rate:85,band:"B",guests:"Up to 2 guests",tone:"#DCE6DF",
+   desc:"A quiet suite in a family compound with its own garden entrance, a working desk and fibre internet. Breakfast can be arranged with the host."},
+  {id:2,name:"Two-bedroom family home, whole floor",area:"CMC",type:"Home",lat:9.0200,lng:38.8300,rate:120,band:"C",guests:"Up to 4 guests",tone:"#E8E0CC",
+   desc:"An entire floor of a family home, suited to a small delegation sharing, with a kitchen and separate living area."},
+  {id:3,name:"One-bedroom serviced apartment",area:"Kazanchis",type:"Serviced apartment",lat:9.0180,lng:38.7650,rate:140,band:"C",guests:"Up to 2 guests",tone:"#D9E2E6",
+   desc:"A serviced apartment near the diplomatic quarter, with daily housekeeping and a 24-hour reception."},
+  {id:4,name:"Family-run guesthouse, 6 rooms",area:"Sarbet",type:"Guesthouse",lat:8.9880,lng:38.7350,rate:65,band:"A",guests:"1–2 guests per room",tone:"#EADBCF",
+   desc:"A small guesthouse able to take a group together, with a shared courtyard and meals on request."},
+  {id:5,name:"Studio apartment with workspace",area:"Old Airport",type:"Serviced apartment",lat:8.9950,lng:38.7450,rate:95,band:"B",guests:"Up to 2 guests",tone:"#DDE3D5",
+   desc:"A studio set up for long conference days, with a desk, fast internet and a backup generator."},
+  {id:6,name:"Private room in a townhouse",area:"Summit",type:"Home",lat:8.9700,lng:38.8400,rate:70,band:"A",guests:"1 guest",tone:"#E6DED6",
+   desc:"A private room and bathroom in a quiet townhouse, with a host who has lived in the area for twenty years."}
+];
+var CHECKS = ["Backup generator","Water storage tank","Fibre internet","Smoke alarm and extinguisher","Secure compound","Host ID and TIN verified"];
+
+var map = null;
+var hasMap = (typeof L !== 'undefined');
+if (hasMap) {
+  try {
+    map = L.map('map', {scrollWheelZoom:false}).setView([9.005, 38.79], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18, attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+    L.circleMarker(VENUE, {radius:11,color:'#13302B',fillColor:'#C8912E',fillOpacity:1,weight:3})
+     .addTo(map).bindPopup('<b>COP32 venue</b><br>Indicative location');
+  } catch (e) { hasMap = false; map = null; }
+}
+if (!hasMap) {
+  var mEl = document.getElementById('map');
+  mEl.style.display = 'flex';
+  mEl.style.alignItems = 'center';
+  mEl.style.justifyContent = 'center';
+  mEl.style.background = '#EDE7D8';
+  mEl.style.color = '#6A6F6B';
+  mEl.style.fontSize = '15px';
+  mEl.style.padding = '24px';
+  mEl.style.textAlign = 'center';
+  mEl.textContent = 'Map unavailable right now. The sample stays are listed beside this panel.';
+}
+
+var markers = {}, filter = 'all', current = null;
+var listEl = document.getElementById('list');
+
+function money(n){ return '$' + n.toLocaleString('en-US'); }
+
+function priceIcon(s){
+  return L.divIcon({className:'', iconSize:[58,30], html:
+    '<div style="background:#FFFDF7;border:2px solid ' + (current===s.id?'#13302B':'#2F7A5B') +
+    ';border-radius:999px;font:700 14px/26px \'Public Sans\',Arial,sans-serif;color:#13302B;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.2)">$' + s.rate + '</div>'});
+}
+
+function render(){
+  listEl.innerHTML = '';
+  STAYS.forEach(function(s){
+    if (hasMap && markers[s.id]) { map.removeLayer(markers[s.id]); delete markers[s.id]; }
+    if (filter !== 'all' && s.type !== filter) return;
+    if (hasMap) {
+      var m = L.marker([s.lat, s.lng], {icon: priceIcon(s), title: s.name}).addTo(map);
+      m.on('click', function(){ open(s.id); });
+      markers[s.id] = m;
+    }
+
+    var b = document.createElement('button');
+    b.className = 'item';
+    b.type = 'button';
+    b.setAttribute('aria-current', current === s.id ? 'true' : 'false');
+    b.innerHTML = '<span class="inner"><span class="thumb" style="background:' + s.tone + '"></span>' +
+      '<span class="txt"><span class="badge">Certified · sample</span>' +
+      '<h3>' + s.name + '</h3>' +
+      '<p class="meta">' + s.type + ' · ' + s.area + ' · ' + s.guests + '</p>' +
+      '<p class="rate">' + money(s.rate) + ' <small>/ night · rate band ' + s.band + '</small></p></span></span>';
+    b.addEventListener('click', function(){ open(s.id); });
+    listEl.appendChild(b);
+  });
+}
+
+function open(id){
+  var s = STAYS.filter(function(x){ return x.id === id; })[0];
+  current = id;
+  render();
+  if (hasMap) { map.panTo([s.lat, s.lng]); }
+  document.getElementById('dTitle').textContent = s.name;
+  document.getElementById('dMeta').textContent = s.type + ' · ' + s.area + ' · ' + s.guests;
+  document.getElementById('dDesc').textContent = s.desc;
+  document.getElementById('dChecks').innerHTML = CHECKS.map(function(c){
+    return '<span>&#10003; ' + c + '</span>'; }).join('');
+  document.getElementById('dRateLine').textContent = money(s.rate) + ' x 12 nights';
+  document.getElementById('dSub').textContent = money(s.rate * 12);
+  document.getElementById('dTotal').textContent = money(s.rate * 12);
+  document.getElementById('detail').showModal();
+}
+
+document.querySelectorAll('.pill').forEach(function(p){
+  p.addEventListener('click', function(){
+    filter = p.dataset.filter;
+    document.querySelectorAll('.pill').forEach(function(q){
+      q.setAttribute('aria-pressed', q === p ? 'true' : 'false'); });
+    render();
+  });
+});
+document.getElementById('dClose').addEventListener('click', function(){ document.getElementById('detail').close(); });
+document.getElementById('cClose').addEventListener('click', function(){ document.getElementById('confirm').close(); });
+document.getElementById('dBook').addEventListener('click', function(){
+  document.getElementById('detail').close();
+  document.getElementById('confirm').showModal();
+});
+render();
+</script>
+</body>
+</html>
